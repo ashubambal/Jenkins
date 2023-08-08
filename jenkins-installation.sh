@@ -2,7 +2,7 @@
 # Author : Ashutosh Bambal
 # Date : 09/06/2023
 # Description : This script is used to install Jenkins on ubuntu machine
-# OS : Ubuntu
+# OS : Ubuntu & Distibution
 # Version : V1 
 ##################################################################################################
 
