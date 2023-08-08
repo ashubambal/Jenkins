@@ -41,18 +41,11 @@ sudo systemctl enable jenkins
 sudo systemctl start jenkins
 echo "Jenkins is enabled and starts successfully."
 
-# Check Jenkins Version 
-jenkins --version
-
 # Use below password to get login in on your jenkins url
 echo "Use below password to get login in on your jenkins url"
 echo "#####################################################################"
-echo "#"
-echo "#"
 echo "Jenkins Server Initial Password: "
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-echo "#"
-echo "#"
 echo "#####################################################################"
 
 
