@@ -31,8 +31,8 @@ echo "--------------------------------------- "
 
 # Again, updating and installing Jenkins
 echo "updating and installing Jenkins..."
-sudo apt-get update
-sudo apt-get install jenkins
+sudo apt-get update -y
+sudo apt-get install jenkins -y
 echo "--------------------------------------- "
 
 # Enable and start the Jenkins
