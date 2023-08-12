@@ -13,14 +13,19 @@ pipeline {
                 sh 'docker build . -t softconsist/todo-app:latest'
             }
         }
-        stage('Deploy Code') {
-            steps {
-                echo "Deploying the code..."
-                withCredentials([usernamePassword(credentialsId: 'softconsist', passwordVariable: 'DOCKERHUB_PSW', usernameVariable: 'DOCKERHUB_USR')]) {
-                    sh "docker login -u \$DOCKERHUB_USR -p \$DOCKERHUB_PSW"
-                    sh "docker push softconsist/todo-app:latest"
+        stage("Push to Docker Hub"){
+            steps{
+                withCredentials([usernamePassword(credentialsId:"softconsist",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                sh "docker tag todo-app ${env.dockerHubUser}/todo-app:latest"
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                sh "docker push ${env.dockerHubUser}/todo-app:latest"
                 }
             }
-        }
+        }    
+        stage("Deploy"){
+            steps{
+                sh "docker-compose down && docker-compose up -d"
+            }
+        }                    
     }
 }
