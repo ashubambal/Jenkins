@@ -1,0 +1,11 @@
+Enter an Item Name - hello
+Freestyle Project - Yes
+Build Step - 
+	- Execute Shell
+		- echo "Hello"
+Save & Apply
+
+***************************************************
+
+NOTE : Default Location where all the jenkins related files are availabe -> /var/lib/jenkins/workspace/
+jenkins run as jenkins user
