@@ -1,10 +1,10 @@
 ## Build Triggers
 
-Trigger builds remotely (e.g., from scripts)
-Build after other projects are built
-Build periodically
-GitHub hook trigger for GITScm polling
-Poll SCM
+1. Trigger builds remotely (e.g., from scripts)
+2. Build after other projects are built
+3. Build periodically
+4. GitHub hook trigger for GITScm polling
+5. Poll SCM
 
 
 # Trigger builds remotely (e.g., from scripts) - 
