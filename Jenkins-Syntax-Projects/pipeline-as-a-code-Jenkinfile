@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    stages {
+        stage("Clone git Repo") {
+            steps {
+                echo "Cloning git repo.."
+                git url: "https://github.com/ashubambal/snake-game.git", branch: "main"
+            }
+        }
+        stage("Build & Test Code") {
+            steps {
+                echo "Building & testing code"
+                sh "docker build -t snake-game ." 
+                
+            }
+        }
+        stage("Push image") {
+            steps {
+                echo "Login Dockerhub & Pushing image"
+                echo "Login DockerHub"
+                withCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]) {
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                sh "docker tag snake-game ${env.dockerHubUser}/snake-game:${BUILD_ID}"
+                sh "docker push ${env.dockerHubUser}/snake-game:${BUILD_ID}"
+                }
+            }
+        }
+        stage("Deploy Code") {
+            steps {
+                echo "Pull image and deploy on server"
+                sh "docker pull softconsist/snake-game:${BUILD_ID}"
+                sh "docker-compose down && docker-compose up -d"
+            }
+        }
+    }
+}
+

@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    environment {
+        middlename = "Rajendra"
+        surename = "Bambal"
+        dob = "28-02-1997"
+    }
+    parameters {
+        string(name: "project-name", defaultValue: "Flipkart", description: "what is your project name")
+        booleanParam(name: "IsRunning", defaultValue: "True", description: "running/pending")
+        choice(name: "Environment", choices: ["PRD","DEV","STG","TST"], description: "Select project Environment")
+    }
+
+    stages {
+        stage("project-name") {
+            steps {
+                echo "project-name"
+                sh 'echo "${project-name}"'
+            }
+        }
+        stage("Project-Status") {
+            steps {
+                echo "Project-Status"
+                sh "echo '${IsRunning}'"
+            }
+        }
+        stage("Envirnmonent Variabe:") {
+            environment {
+                city = "Nagpur"
+            }
+            steps {
+                echo "Envirnmonent Variabe"
+                sh "echo '${BUILD_ID}'"
+                sh "echo '${JENKINS_URL}'"
+            }
+        }
+        stage("Environment") {
+            steps {
+                echo "Environment"
+                sh "echo '${Environment}'"
+            }
+        }
+    }
+}

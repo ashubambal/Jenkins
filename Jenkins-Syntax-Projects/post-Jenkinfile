@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: "project", defaultValue: "Flipkart", description: "what is your project name")
+        booleanParam(name: "IsRunning", defaultValue: "True", description: "running/pending")
+        choice(name: "environment", choices: ["PRD","DEV","STG","TST"], description: "Select project Environment")
+    }
+    stages {
+        stage("project-name") {
+            steps {
+                echo "project-name"
+                sh "echo '${project}'"
+            }
+        }
+        stage("Project-Status") {
+            steps {
+                echo "Project-Status"
+                sh "echo '${IsRunning}'"
+            }
+        }
+        stage("Environment") {
+            input {
+                message "should we continue"
+                ok "Yes we should"
+            }
+            steps {
+                echo "Environment"
+                sh "echo '${environment}'"
+            }
+        }
+
+    }
+            post {
+            always {
+                echo "I will always say hello"
+            }
+            failure {
+                echo "I will always say no"
+            }
+            success {
+                echo "I will always say success"
+            }
+        }
+}
